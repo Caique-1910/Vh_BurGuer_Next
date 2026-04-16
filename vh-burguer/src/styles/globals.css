@@ -4,6 +4,9 @@
     --laranja-destaque: #FFA300;
     --vinho: #451201;
     --fonte-preta: #000000;
+
+    --tamanho-titulo: 50px;
+    --tamanho-texto-btn: 17px;
 }
 
 *{
@@ -11,4 +14,8 @@
     padding: 0;
     box-sizing: border-box;
     font-family: var(--font-padrao);
+}
+
+.layout_guide{
+    width: 80%;
 }

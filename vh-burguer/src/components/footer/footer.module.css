@@ -1,0 +1,43 @@
+#footer{
+    background-color: var(--vinho);
+    display: flex;
+    flex-direction: column;
+    height: 13vh;
+    gap: 20px;
+    justify-content: space-around;
+    padding: 5px;
+}
+
+#nav_imgs{
+    display: flex;
+    justify-content: space-between;
+}
+
+#nav_footer{
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+}
+
+#footer hr{
+    width: 80%;
+    margin: 0 auto;
+    border: 0;
+    border-top: 1px solid var(--laranja-destaque);
+}
+
+#footer p {
+    color: var(--laranja-destaque);
+    display: flex;
+    justify-content: center;
+}
+
+#logo{
+    width: 15%;
+    height: 80%;
+}
+
+#icones{
+    width: 60%;
+    height: 60%;
+}

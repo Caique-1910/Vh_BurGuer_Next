@@ -17,6 +17,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 30px;
 }
 
 #campo_login h1{
@@ -24,6 +25,7 @@
     max-width: 520px;
     text-align: center;
     font-weight: 500;
+    font-size: var(--tamanho-titulo);
     color: var(--laranja-destaque);
     font-family: var(--font-padrao);
 }
@@ -68,5 +70,19 @@
     height: 52px;
     border: none;
     border-radius: 10px;
-    background-color: var(--laranja-destaque);
+    background: var(--laranja-destaque);
+    color: var(--vinho);
+    font-weight: 700;
+    cursor: pointer;
+    font-size: var(--tamanho-texto-btn);
+}
+
+@media (max-width: 1000px) {
+    #main {
+        grid-template-columns: 1fr;
+    }
+
+    #main img {
+        display: none;
+    }
 }
