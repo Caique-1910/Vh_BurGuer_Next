@@ -1,43 +1,55 @@
-#footer{
-    background-color: var(--vinho);
+#footer_home {
+    background: var(--vinho);
     display: flex;
-    flex-direction: column;
-    height: 13vh;
-    gap: 20px;
-    justify-content: space-around;
-    padding: 5px;
+    justify-content: center;
+    align-items: center;
+
+    height: 20vh;
 }
 
-#nav_imgs{
+.container {
     display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+#footer_icons {
+    display: flex;
+    align-items: center;
     justify-content: space-between;
 }
 
-#nav_footer{
+.logo_vhburguer_footer {
+    width: 150px;
+
+}
+
+#icons {
     display: flex;
-    justify-content: flex-end;
-    gap: 20px;
+    gap: 14px;
 }
 
-#footer hr{
-    width: 80%;
-    margin: 0 auto;
-    border: 0;
-    border-top: 1px solid var(--laranja-destaque);
+#icons img {
+    width: 25px;
+    height: 25px;
+
+    display: block;
+    cursor: pointer;
 }
 
-#footer p {
+/* linha */
+#linha {
+    height: 1px;
+    width: 100%;
+    background: var(--laranja-destaque);
+    opacity: .4;
+}
+
+/* copyright */
+#footer_home p {
+    margin: 0;
+    text-align: center;
     color: var(--laranja-destaque);
-    display: flex;
-    justify-content: center;
-}
-
-#logo{
-    width: 15%;
-    height: 80%;
-}
-
-#icones{
-    width: 60%;
-    height: 60%;
+    font-size: var(--fonte-texto);
+    font-weight: 500;
 }

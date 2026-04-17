@@ -1,0 +1,198 @@
+#banner h1{
+    margin: 30px;
+    font-size: var(--tamanho-titulo);
+}
+
+#banner{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #f1f1f1;
+}
+
+#superior_banner{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 3px;
+    color: var(--laranja-destaque);
+    font-size: 25px;
+}
+
+#superior_banner img{
+    margin-right: 2px;
+}
+
+#div_botoes{
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+#btn_chamar{
+    background-color: var(--laranja-destaque);
+    border: none;
+    height: 30px;
+    width: 22%;
+    border-radius: 10px;
+    color: var(--vinho);
+    font-weight: 500;
+}
+
+#btn_ver{
+    background-color: var(--vinho);
+    border: none;
+    height: 30px;
+    width: 22%;
+    border-radius: 10px;
+    color: var(--laranja-destaque);
+    font-weight: 500;
+}
+
+#destaques{
+    display: flex;
+    background-color: var(--fundo-escuro);
+    justify-content: center;
+    align-items: center;
+    height: 65vh;
+    width: 100%;
+}
+
+#cards_destaques{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70%;
+    width: 100%;
+    gap: 16px;
+}
+
+#div_maispedidos{
+    background-image: url('../../../public/imgs/mais_pedidos.png');
+    height: 100%;
+    width: 25%;
+    border-radius:  15px;
+    text-align: start;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    color: var(--fundo-claro);
+}
+
+#div_bacon_combos{
+    width: 20%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#div_bacon{
+    background-image: url('../../../public/imgs/muito_bacon.png');
+    width: 120%;
+    height: 40%;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: end;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    color: var(--fundo-claro);
+}
+
+#div_combos{
+    background-image: url('../../../public/imgs/super_combos.png');
+    width: 120%;
+    height: 60%;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: end;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    color: var(--fundo-claro);
+    
+}
+
+#cardapio{
+    display: flex;
+    text-align: center;
+    background-color: var(--fundo-claro);
+    height: 100vh;
+    flex-direction: column;
+    gap: 10px;
+}
+
+ #btn_filtro{
+    background-color: var(--laranja-destaque);
+    border: none;
+    width: 7%;
+    height: 5%;
+    font-weight: 500;
+    color: var(--vinho);
+    border-radius: 5px;
+    font-size: var(--tamanho-texto);
+ }
+
+#btn_cards{
+    display: flex;
+    justify-content: flex-start;
+    padding: 10px;
+    height: 100vh;
+}
+
+#cardapio h2{
+    color: var(--laranja-destaque);
+    font-size: var(--tamanho-titulo);
+}
+
+
+#unidade{
+    background-color: var(--fundo-escuro);
+    width: 100%;
+    height: 100%; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 60px;
+}
+
+
+
+#unidade_img_list{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+#unidade_img_list img{
+    width: 40%;
+    height: 40%;
+    border-radius: 15px;
+}
+
+#unidades_textos{
+    color: var(--fundo-claro);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 70px;
+}
+
+#unidades_textos h2{
+    margin-right: 20px;
+    margin-bottom: 10px;
+}
+
+#unidades_textos ul{
+    margin-left: 27px;
+    font-size: var(--tamanho-texto);
+}
