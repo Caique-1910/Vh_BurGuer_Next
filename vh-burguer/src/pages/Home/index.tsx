@@ -1,6 +1,7 @@
 import Footer from "@/components/footer/footer";
 import Header from "@/components/header/header";
 import styles from "./home.module.css"
+import ListaProduto from "@/components/lista-produto/lista-produto";
 
 const Home = () => {
     return (
@@ -44,15 +45,12 @@ const Home = () => {
                     </div>
                 </section>
 
-                <section id={styles.cardapio}>
-                    <h2>CARDÁPIO</h2>
-                    
-                    <div id={styles.btn_cards}>
-                        <button id={styles.btn_filtro}>
-                            Filtrar <img src="./imgs/" alt="" />
-                        </button>
+                 <section id={styles.cardapio}>
+                    <div className={`${styles.container_cardapio} layout_guide`}>
+                        <h2>Cardápio</h2>
+                        {/* chamar componente da lista */}
+                        <ListaProduto/>
                     </div>
-
                 </section>
 
                 <section id={styles.unidade}>

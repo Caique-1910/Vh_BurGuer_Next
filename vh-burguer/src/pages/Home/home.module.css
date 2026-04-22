@@ -41,6 +41,16 @@
     font-weight: 500;
 }
 
+#btn_chamar:hover{
+     background-color: var(--vinho);
+    border: none;
+    height: 30px;
+    width: 22%;
+    border-radius: 10px;
+    color: var(--laranja-destaque);
+    font-weight: 500;
+}
+
 #btn_ver{
     background-color: var(--vinho);
     border: none;
@@ -48,6 +58,16 @@
     width: 22%;
     border-radius: 10px;
     color: var(--laranja-destaque);
+    font-weight: 500;
+}
+
+#btn_ver:hover{
+    background-color: var(--laranja-destaque);
+    border: none;
+    height: 30px;
+    width: 22%;
+    border-radius: 10px;
+    color: var(--vinho);
     font-weight: 500;
 }
 
@@ -120,38 +140,27 @@
     
 }
 
-#cardapio{
-    display: flex;
-    text-align: center;
+#cardapio {
     background-color: var(--fundo-claro);
-    height: 100vh;
-    flex-direction: column;
-    gap: 10px;
-}
-
- #btn_filtro{
-    background-color: var(--laranja-destaque);
-    border: none;
-    width: 7%;
-    height: 5%;
-    font-weight: 500;
-    color: var(--vinho);
-    border-radius: 5px;
-    font-size: var(--tamanho-texto);
- }
-
-#btn_cards{
+    min-height: 100vh;
     display: flex;
-    justify-content: flex-start;
-    padding: 10px;
-    height: 100vh;
+    justify-content: center;
 }
 
-#cardapio h2{
+.container_cardapio {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 50px;
+    padding: 75px 0;
+}
+
+.container_cardapio h2 {
     color: var(--laranja-destaque);
     font-size: var(--tamanho-titulo);
+    font-weight: 500;
+    text-transform: uppercase;
 }
-
 
 #unidade{
     background-color: var(--fundo-escuro);
