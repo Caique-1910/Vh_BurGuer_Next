@@ -71,7 +71,7 @@
     font-weight: 500;
 }
 
-#destaques{
+.destaques{
     display: flex;
     background-color: var(--fundo-escuro);
     justify-content: center;
@@ -140,7 +140,7 @@
     
 }
 
-#cardapio {
+.cardapio {
     background-color: var(--fundo-claro);
     min-height: 100vh;
     display: flex;
@@ -162,7 +162,7 @@
     text-transform: uppercase;
 }
 
-#unidade{
+.unidade{
     background-color: var(--fundo-escuro);
     width: 100%;
     height: 100%; 

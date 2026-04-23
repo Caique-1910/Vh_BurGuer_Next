@@ -21,7 +21,7 @@ const Home = () => {
                     </div>
                 </section>
 
-                <section id={styles.destaques}>
+                <section className={styles.destaques} id="destaques">
 
                     <div id={styles.cards_destaques}>
                         <div id={styles.div_maispedidos}>
@@ -45,7 +45,7 @@ const Home = () => {
                     </div>
                 </section>
 
-                 <section id={styles.cardapio}>
+                 <section className={styles.cardapio} id="cardapio">
                     <div className={`${styles.container_cardapio} layout_guide`}>
                         <h2>Cardápio</h2>
                         {/* chamar componente da lista */}
@@ -53,7 +53,7 @@ const Home = () => {
                     </div>
                 </section>
 
-                <section id={styles.unidade}>
+                <section className={styles.unidade} id="unidade">
 
                     <div id={styles.unidade_img_list}>
 

@@ -1,0 +1,36 @@
+#subheader {
+    height: 10vh;
+    background-color: var(--vinho);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#logo {
+    width: 250px;
+    margin-left: 9.5%;
+}
+
+.link_voltar{
+    color: var(--laranja-destaque);
+    text-decoration: none;
+    margin-right: 9.5%;
+    font-size: var(--tamanho-texto-btn);
+}
+
+
+@media (max-width: 768px) {
+    #btn_icon {
+        display: block;
+        height: 40px;
+    }
+
+    #nav_menu {
+        display: none;
+    }
+
+    #logo {
+        width: 200px;
+    }
+
+}

@@ -1,0 +1,38 @@
+.conteudoPrin{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 1%;
+}
+
+.camp_nome{
+    display: grid;
+    gap: 2%;
+}
+
+.camp_descri{
+    display: grid;
+    gap: 2%;
+}
+
+.camp_prec{
+    display: grid;
+    gap: 2%;
+}
+
+.camp_cat{
+    display: grid;
+    gap: 2%;
+}
+
+.camp_img{
+    display: grid;
+    gap: 2%;
+}
+
+.div_btns{
+    display: flex;
+    gap: 20px;
+}
