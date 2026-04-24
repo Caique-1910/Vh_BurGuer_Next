@@ -14,7 +14,7 @@ const ListaProduto = () => {
                 </button>
                 <div id={styles.botoes_direita}>
                     <Link className={styles.botao} href="">Promoções</Link>
-                    <Link className={styles.botao} href="">Produtos</Link>
+                    <Link className={styles.botao} href="./produto">Produtos</Link>
                 </div>
             </div>
             <div id={styles.cards_produtos}>
