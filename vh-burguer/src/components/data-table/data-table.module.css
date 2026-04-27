@@ -1,0 +1,22 @@
+#tabela{
+    border-collapse: separate;
+    border-spacing: 0 10px; 
+}
+
+#tabela th{
+    color: var(--fonte-preta);
+    font-size: var(--tamanho-texto-btn);
+}
+
+#tabela td{
+    padding: 15px;
+    gap: 1px;
+    border: 20px;
+    text-align: center;
+}
+
+
+.tracado{
+    width: 100%;
+    color: grey;
+}

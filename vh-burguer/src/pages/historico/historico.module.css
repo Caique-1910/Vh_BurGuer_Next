@@ -1,0 +1,15 @@
+#contPrin{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2%;
+    gap: 20px;
+    background-color: var(--fundo-claro);
+    height: 70vh;
+}
+
+#contPrin h3{
+    color:  var(--laranja-destaque);
+    font-size: var(--tamanho-titulo);
+}
+
