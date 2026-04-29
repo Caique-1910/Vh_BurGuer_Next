@@ -14,8 +14,8 @@ const Login = () => {
     const [senha, setSenha] = useState<string>("");
 
     const router = useRouter();
-    const noticicacao = (msg: string) => toast(msg);
-    const erro = (msg:string) => toast.error(msg);
+    const noticicacao = (msg: string) => toast.success(msg);
+    const erro = (msg: string) => toast.error(msg);
 
     async function autenticar(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
@@ -28,24 +28,13 @@ const Login = () => {
             }, 2000);
         }
         catch (error: any) {
-            alert(error.message)
+            erro(error.message)
         }
     }
 
     return (
         <>
-            <ToastContainer
-                position="top-right"
-                autoClose={5000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick={false}
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-                theme="light"
-            />
+            <ToastContainer/>
             <main id={styles.main}>
                 <img src="../imgs/hamburguer-login.png" alt="Hámburguer flutuando com os ingredientes" />
 

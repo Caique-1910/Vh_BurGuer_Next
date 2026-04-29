@@ -77,6 +77,9 @@
     font-size: var(--tamanho-texto-btn);
 }
 
+
+
+
 @media (max-width: 1000px) {
     #main {
         grid-template-columns: 1fr;
