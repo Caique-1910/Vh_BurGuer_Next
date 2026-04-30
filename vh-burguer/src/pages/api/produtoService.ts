@@ -13,23 +13,21 @@ export async function cadastrarProduto(dados: Produto) {
     try {
         const formData = new FormData();
 
-        formData.append("nome", dados.nome)
-        formData.append("descricao", dados.descricao)
-        formData.append("preco", dados.preco)
+        formData.append("Nome", dados.nome)
+        formData.append("Descricao", dados.descricao)
+        formData.append("Preco", dados.preco)
 
         if (dados.imagem) {
-            formData.append("imagem", dados.imagem)
+            formData.append("Imagem", dados.imagem)
         }
 
          dados.categoriasId.forEach((id) => {
-            formData.append("categoriaIds", id.toString())
+            formData.append("CategoriaIDs", id.toString())
         })
 
-
         await api.post("Produto", formData);
-        console.log("Resenha funcionou")
-    }
-    catch (error: any) {
-        throw new Error(error.message);
+
+    }catch (error: any) {
+        throw new Error(error.response.data);
     }
 }
