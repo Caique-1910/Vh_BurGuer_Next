@@ -60,7 +60,7 @@ const Produto = () => {
     return (
         <>
             <SubHeader />
-            <Toast/>
+            <Toast />
             <main className={styles.conteudoPrin}>
                 <h2>CRIAR PRODUTO</h2>
 
