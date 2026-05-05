@@ -3,13 +3,13 @@ import Footer from "@/components/footer/footer"
 import SubHeader from "@/components/sub-header/sub-header"
 import styles from "./historico.module.css"
 
-
 const Historico = () =>{
+
     return(
         <>
             <SubHeader/>
             <main id={styles.contPrin}>
-            <h3>Histórico de alterações: Monstro</h3>
+            <h3>Histórico de alterações</h3>
             <DataTable/>
             </main>
             <Footer/>

@@ -22,15 +22,20 @@ const CardProduto = ({ titulo, descricao, preco, img, produtoID }: Produto) => {
             <p className={styles.desc_produto}>{descricao}</p>
             <div className={styles.campo_itens}>
                 <p className={styles.valor_produto}>{formatarPreco(preco)}</p>
-                <button>
-                    <img src="/imgs/info.png" alt="" />
-                </button>
-                <button>
-                    <img src="/imgs/trash.svg" alt="ícone que representa exclusão" />
-                </button>
+                <Link href={"/historico/" + produtoID}>
+                    <button>
+                        <img src="/imgs/info.png" alt="" />
+                    </button>
+                </Link>
+
                 <button>
                     <img src="/imgs/editar.svg" alt="ícone que representa edição" />
                 </button>
+
+                <button>
+                    <img src="/imgs/trash.svg" alt="ícone que representa exclusão" />
+                </button>
+                
             </div>
         </article>
     )

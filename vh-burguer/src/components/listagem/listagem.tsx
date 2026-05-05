@@ -1,13 +1,19 @@
+import { formatarPreco } from "@/utils/formatacao";
 import styles from "./listagem.module.css"
 
+type dados = {
+    dataAlteracao:string;
+    nomeAnterior: string;
+    precoAnterior:number;
+}
 
-const Listagem = () => {
+const Listagem = ({dataAlteracao, nomeAnterior, precoAnterior} : dados) => {
     return(
         <>
            <tr className={styles.linhas}>
-            <td>12/12/12</td>
-            <td>Monstro</td>
-            <td>R$66,00</td>
+            <td>{dataAlteracao}</td>
+            <td>{nomeAnterior}</td>
+            <td>{formatarPreco(precoAnterior)}</td>
             </tr>
         </>
     )
