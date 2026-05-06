@@ -1,11 +1,10 @@
-import { api } from "./api";
+import {api} from "./api";
 
-
-export async function listarPorIdDoProduto(produtoId: number) {
+export async function listarPorIdDoProduto(produtoId : number){
     try {
-        const response = await api.get("LogProduto/produto" + produtoId);
+        const response = await api.get("LogProduto/produto/" + produtoId);
         return response.data;
     } catch (error: any) {
-        throw new Error(error.response.data);
+        throw new Error(error.response.data)
     }
 }

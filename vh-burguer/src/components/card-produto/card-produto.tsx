@@ -7,11 +7,12 @@ interface Produto {
     descricao: string,
     preco: number,
     img: string,
-    produtoID: number
+    produtoID: number,
+    onDelete: (produtoId: number) => void
 }
 
 
-const CardProduto = ({ titulo, descricao, preco, img, produtoID }: Produto) => {
+const CardProduto = ({ titulo, descricao, preco, img, produtoID, onDelete }: Produto) => {
     return (
         <article className={styles.card_produto}>
             <Link href={"/detalhe-produto/" + produtoID}>
@@ -28,14 +29,17 @@ const CardProduto = ({ titulo, descricao, preco, img, produtoID }: Produto) => {
                     </button>
                 </Link>
 
-                <button>
-                    <img src="/imgs/editar.svg" alt="ícone que representa edição" />
-                </button>
+                <Link href={"/produto?id=" + produtoID }>
+                    <button>
+                        <img src="/imgs/editar.svg" alt="ícone que representa edição" />
+                    </button>
+                </Link>
 
-                <button>
+                <button onClick={() => onDelete(produtoID)}>
                     <img src="/imgs/trash.svg" alt="ícone que representa exclusão" />
                 </button>
-                
+
+
             </div>
         </article>
     )

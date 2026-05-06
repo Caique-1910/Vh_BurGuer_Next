@@ -4,14 +4,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSliders } from '@fortawesome/free-solid-svg-icons'
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { listarProduto } from "@/pages/api/produtoService";
+import { excluirProduto, listarProduto } from "@/pages/api/produtoService";
+import { erro, notificacao, toastConfirmarExclusao } from "@/utils/toast";
 
 interface Produto {
     produtoID: number,
     nome: string,
     preco: number,
     descricao: string,
-    imagemUrl: string
+    imagemUrl: string,
+    statusProduto: boolean
 }
 
 
@@ -30,6 +32,25 @@ const ListaProduto = () => {
         catch (error: any) {
             console.log(error.message);
         }
+    }
+
+    function confimarExclusao(produtoId: number) {
+        toastConfirmarExclusao(async () => {
+            try {
+                await excluirProduto(produtoId);
+                setProdutos((listaAtual) =>
+                    listaAtual.map((produto) =>
+                        produto.produtoID === produtoId
+                            ? { ...produto, statusProduto: false }
+                            : produto
+                    )
+                )
+                notificacao("Produto inatividado");
+                listar();
+            } catch (error: any) {
+                erro(error.message);
+            }
+        })
     }
 
     useEffect(() => {
@@ -58,6 +79,7 @@ const ListaProduto = () => {
                         descricao={item.descricao}
                         preco={item.preco}
                         img={item.imagemUrl}
+                        onDelete={confimarExclusao}
                     />
                 )
                     : (

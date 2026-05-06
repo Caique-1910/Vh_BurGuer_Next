@@ -4,9 +4,10 @@ import styles from "./produto.module.css"
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { listarCategoria } from "../api/categoriaService";
-import { cadastrarProduto } from "../api/produtoService";
+import { cadastrarProduto, editarProduto, listarPorId } from "../api/produtoService";
 import { erro, notificacao } from "@/utils/toast";
 import Toast from "@/components/toast/toast";
+import { useRouter } from "next/router";
 
 interface Categoria {
     categoriaID: number,
@@ -24,13 +25,32 @@ const Produto = () => {
     const [imagem, setImagem] = useState<File | null>(null);
     const [categoriasSelecionadas, setcategoriasSelecionadas] = useState<number[]>([]);
 
+
+    const router = useRouter();
+    const id = router.query.id;
+
+    let edicao = id ? true : false;
+
+
     async function listarCatagoriaEmProduto() {
         const lista = await listarCategoria();
         setCategorias(lista.data);
         console.log(lista.data);
     }
 
-    async function Cadastrar(e: React.FormEvent<HTMLFormElement>) {
+    async function carregarInformacoes() {
+        if (!id) return;
+
+        const produto = await listarPorId(Number(id));
+        setNome(produto.nome);
+        setDescricao(produto.descricao);
+        setPreco(produto.preco);
+        setcategoriasSelecionadas(produto.categoriaIDs);
+
+
+    }
+
+    async function salvarProduto(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
         try {
 
@@ -42,8 +62,14 @@ const Produto = () => {
                 categoriasId: categoriasSelecionadas
             }
 
-            cadastrarProduto(dados);
-            notificacao("Produto cadastrado.");
+            if (edicao) {
+                await editarProduto(Number(id), dados);
+                notificacao("Produto editado.");
+            }
+            else {
+                await cadastrarProduto(dados);
+                notificacao("Produto cadastrado.");
+            }
         } catch (error: any) {
             erro(error.message);
         }
@@ -53,6 +79,8 @@ const Produto = () => {
 
     useEffect(() => {
         listarCatagoriaEmProduto();
+        carregarInformacoes();
+
     }, [])
 
 
@@ -62,9 +90,9 @@ const Produto = () => {
             <SubHeader />
             <Toast />
             <main className={styles.conteudoPrin}>
-                <h2>CRIAR PRODUTO</h2>
+                <h2>{edicao ? "Editar Produto" : " Criar Produto"}</h2>
 
-                <form action="" className={styles.forms} onSubmit={Cadastrar}>
+                <form action="" className={styles.forms} onSubmit={salvarProduto}>
 
                     <div className={styles.camp_nome}>
                         <label htmlFor="" className={styles.label}>Nome do produto</label>
