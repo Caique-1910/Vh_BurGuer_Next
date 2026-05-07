@@ -8,6 +8,7 @@ import { cadastrarProduto, editarProduto, listarPorId } from "../api/produtoServ
 import { erro, notificacao } from "@/utils/toast";
 import Toast from "@/components/toast/toast";
 import { useRouter } from "next/router";
+import { verificarAutenticacao } from "@/utils/auth";
 
 interface Categoria {
     categoriaID: number,
@@ -25,6 +26,7 @@ const Produto = () => {
     const [imagem, setImagem] = useState<File | null>(null);
     const [categoriasSelecionadas, setcategoriasSelecionadas] = useState<number[]>([]);
 
+    const [estaAutenticado, setEstaAutenticado] = useState(false);
 
     const router = useRouter();
     const id = router.query.id;
@@ -78,10 +80,20 @@ const Produto = () => {
 
 
     useEffect(() => {
+
+        if(!verificarAutenticacao()){
+            router.push("/home");
+        }else{
+            setEstaAutenticado(true);
+        }
+        
         listarCatagoriaEmProduto();
         carregarInformacoes();
-
     }, [])
+
+    if(!estaAutenticado){
+        return null;
+    }
 
 
 
@@ -112,9 +124,13 @@ const Produto = () => {
 
                     <div className={styles.camp_cat}>
                         <label htmlFor="" className={styles.label}>Categoria</label>
-                        <select className={styles.input} multiple onChange={(e) => setcategoriasSelecionadas(
-                            Array.from(e.target.selectedOptions).map((option) => Number(option.value))
-                        )}>
+                        <select
+                            className={styles.input}
+                            multiple
+                            value={categoriasSelecionadas.map(String)}
+                            onChange={(e) => setcategoriasSelecionadas(
+                                Array.from(e.target.selectedOptions).map((option) => Number(option.value))
+                            )}>
                             {categorias.map((item) => (
                                 <option value={item.categoriaID} key={item.categoriaID}>
                                     {item.nome}
@@ -127,7 +143,9 @@ const Produto = () => {
 
                     <div className={styles.camp_img}>
                         <label htmlFor="" className={styles.label}>URL da imagem</label>
-                        <input type="file" className={styles.input_file} onChange={(e) => {
+                        <input type="file" 
+                        className={styles.input_file} 
+                        onChange={(e) => {
                             if (e.target.files && e.target.files[0]) {
                                 setImagem(e.target.files[0])
                             }

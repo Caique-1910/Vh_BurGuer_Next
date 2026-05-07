@@ -8,11 +8,12 @@ interface Produto {
     preco: number,
     img: string,
     produtoID: number,
-    onDelete: (produtoId: number) => void
+    onDelete: (produtoId: number) => void,
+    estaLogado: boolean
 }
 
 
-const CardProduto = ({ titulo, descricao, preco, img, produtoID, onDelete }: Produto) => {
+const CardProduto = ({ titulo, descricao, preco, img, produtoID, onDelete, estaLogado }: Produto) => {
     return (
         <article className={styles.card_produto}>
             <Link href={"/detalhe-produto/" + produtoID}>
@@ -23,21 +24,24 @@ const CardProduto = ({ titulo, descricao, preco, img, produtoID, onDelete }: Pro
             <p className={styles.desc_produto}>{descricao}</p>
             <div className={styles.campo_itens}>
                 <p className={styles.valor_produto}>{formatarPreco(preco)}</p>
-                <Link href={"/historico/" + produtoID}>
-                    <button>
-                        <img src="/imgs/info.png" alt="" />
-                    </button>
-                </Link>
+                {estaLogado && (
+                    <>
+                        <Link href={"/historico/" + produtoID}>
+                            <button>
+                                <img src="/imgs/info.png" alt="" />
+                            </button>
+                        </Link>
 
-                <Link href={"/produto?id=" + produtoID }>
-                    <button>
-                        <img src="/imgs/editar.svg" alt="ícone que representa edição" />
-                    </button>
-                </Link>
-
-                <button onClick={() => onDelete(produtoID)}>
-                    <img src="/imgs/trash.svg" alt="ícone que representa exclusão" />
-                </button>
+                        <Link href={"/produto?id=" + produtoID}>
+                            <button>
+                                <img src="/imgs/editar.svg" alt="ícone que representa edição" />
+                            </button>
+                        </Link>
+                        <button onClick={() => onDelete(produtoID)}>
+                            <img src="/imgs/trash.svg" alt="ícone que representa exclusão" />
+                        </button>
+                    </>
+                )}
 
 
             </div>

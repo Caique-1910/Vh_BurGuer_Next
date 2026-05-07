@@ -1,47 +1,64 @@
 import Footer from "@/components/footer/footer";
 import SubHeader from "@/components/sub-header/sub-header";
 import styles from "./categoria.module.css"
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { cadastrarCategoria } from "../api/categoriaService";
 import { ToastContainer, toast } from "react-toastify";
 import { Fragment } from "react/jsx-runtime";
 import { matchesGlob } from "path";
+import { verificarAutenticacao } from "@/utils/auth";
+import { useRouter } from "next/router";
 
 const Categoria = () => {
 
-      const[categoria, setCategoria] = useState<string>("");
+    const [categoria, setCategoria] = useState<string>("");
 
     const notificacao = (msg: string) => toast.success(msg);
     const erro = (msg: string) => toast.error(msg);
 
-    async function cadastrar(e: React.FormEvent<HTMLFormElement>){
+    const [estaAutenticado, setEstaAutenticado] = useState(false);
+     const router = useRouter();
+
+    async function cadastrar(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
-        try{
+        try {
             await cadastrarCategoria(categoria);
             notificacao("Cadastro realizado com sucesso!");
-        }catch(error: any){
+        } catch (error: any) {
             erro(error.message);
         }
     }
 
+    useEffect(() => {
+        
+            if(!verificarAutenticacao()){
+                router.push("/home");
+            } else{
+                setEstaAutenticado(true);
+            }
+        }, [])
 
-    return(
+     if(!estaAutenticado){
+        return null;
+    }
+
+    return (
         <>
-            <ToastContainer/>
-            <SubHeader/>
+            <ToastContainer />
+            <SubHeader />
             <main className={styles.cont_prin}>
                 <h2>CRIAR CATEGORIA</h2>
                 <form action="" className={styles.forms} onSubmit={cadastrar}>
                     <label htmlFor="" className={styles.label}>Nome categoria</label>
-                    <input type="text" placeholder="Premium" className={styles.input} value={categoria} onChange={(e) => setCategoria(e.target.value)}/>
-                <div className={styles.div_btns}>
-                    <button className={styles.btn_sal} type="submit">Salvar</button>
-                    <button className={styles.btn_canc} type="reset">Cancelar</button>
-                </div>
+                    <input type="text" placeholder="Premium" className={styles.input} value={categoria} onChange={(e) => setCategoria(e.target.value)} />
+                    <div className={styles.div_btns}>
+                        <button className={styles.btn_sal} type="submit">Salvar</button>
+                        <button className={styles.btn_canc} type="reset">Cancelar</button>
+                    </div>
                 </form>
 
             </main>
-            <Footer/>
+            <Footer />
         </>
     )
 }

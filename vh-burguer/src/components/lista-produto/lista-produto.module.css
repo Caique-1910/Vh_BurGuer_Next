@@ -23,10 +23,27 @@
 }
 
 #botoes_direita {
-    width: 50%;
+   
     display: flex;
     justify-content: flex-end;
     gap: 20px;
+}
+
+#pesquisa{
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    width: 31%;
+    align-items: center;
+    font-size: var(--tamanho-texto-btn);
+    color: var(--laranja-destaque);
+}
+
+#pesquisa input{
+    border-radius: 2px;
+    width: 60%;
+    height: 70%;
+    padding: 1%;
 }
 
 #cards_produtos {
