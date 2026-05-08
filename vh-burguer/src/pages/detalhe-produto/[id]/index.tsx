@@ -10,7 +10,7 @@ interface Produto {
     nome: string,
     descricao: string,
     preco: number,
-    imagemURl: string,
+    imagemUrl: string,
     categorias: string[]
 }
 
@@ -26,6 +26,7 @@ const Detalhe = () => {
     async function listarProduto() {
         try {
             const response = await listarPorId(Number(id));
+            console.log(produto?.categorias);
             setProduto(response);
         } catch (error: any) {
             console.log(error.message);
@@ -46,44 +47,44 @@ const Detalhe = () => {
             <main id={styles.conteudoPrin}>
                 {produto ? (
                     <>
-                <div id={styles.informacoes}>
-                    <div id={styles.part_superior}>
-                        <h3 className={styles.titulo}>Detalhes do {produto.nome}</h3>
-                        <img id={styles.imagem} src="./imgs/HamburguerAlcatraComBacon_1-scaled 1.png" alt="" />
-                    </div>
-
-                    <div id={styles.part_inferior}>
-                        <div className={styles.esquerda}>
-                            <div>
-                                <h3>Nome do produto</h3>
-                                <p>{produto.nome}</p>
+                        <div id={styles.informacoes}>
+                            <div id={styles.part_superior}>
+                                <h3 className={styles.titulo}>Detalhes do {produto.nome}</h3>
+                                <img id={styles.imagem} src={produto.imagemUrl} alt="" />
                             </div>
 
-                            <div>
-                                <h3>Descrição:</h3>
-                                <p>{produto.descricao}.</p>
+                            <div id={styles.part_inferior}>
+                                <div className={styles.esquerda}>
+                                    <div>
+                                        <h3>Nome do produto</h3>
+                                        <p>{produto.nome}</p>
+                                    </div>
+
+                                    <div>
+                                        <h3>Descrição:</h3>
+                                        <p>{produto.descricao}.</p>
+                                    </div>
+                                </div>
+
+                                <div className={styles.direita}>
+                                    <div>
+                                        <h3>Preço (R$)</h3>
+                                        <p>{formatarPreco(produto.preco)}</p>
+                                    </div>
+
+                                    <div>
+                                        <h3>Categorias</h3>
+                                        <ul className={styles.lista}>
+                                            { produto.categorias.map((cat) => (
+                                                <li key={cat}> {cat} </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-
-                        <div className={styles.direita}>
-                            <div>
-                                <h3>Preço (R$)</h3>
-                                <p>{formatarPreco(produto.preco)}</p>
-                            </div>
-
-                            <div>
-                                <h3>Categorias</h3>
-                                <ul>
-                                    {produto?.categorias.map((cat) => (
-                                        <li key={cat}>{cat}</li>
-                                    ))}
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                </>
-                 ) : (<p>Carregando produto...</p>)}
+                    </>
+                ) : (<p>Carregando produto...</p>)}
             </main>
             <Footer />
         </>

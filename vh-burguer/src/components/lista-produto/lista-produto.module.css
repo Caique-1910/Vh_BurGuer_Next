@@ -35,6 +35,7 @@
     justify-content: center;
     width: 31%;
     align-items: center;
+    margin-left: 3%;
     font-size: var(--tamanho-texto-btn);
     color: var(--laranja-destaque);
 }

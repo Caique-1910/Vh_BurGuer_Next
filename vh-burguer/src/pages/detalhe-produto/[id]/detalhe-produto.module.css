@@ -1,12 +1,13 @@
-#conteudoPrin{
+#conteudoPrin {
     background-color: var(--fundo-claro);
     height: 100%;
     display: flex;
     justify-content: center;
     padding: 3%;
+    height: 70vh;
 }
 
-#informacoes{
+#informacoes {
     background-color: #ffffff;
     height: 100%;
     width: 90%;
@@ -14,13 +15,14 @@
     padding: 1%;
 }
 
-#imagem{
+#imagem {
     height: 60%;
     width: 60%;
+    margin-left: 22%;
     border-radius: 15px;
 }
 
-#part_superior{
+#part_superior {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -28,12 +30,12 @@
     gap: 20px;
 }
 
-.titulo{
+.titulo {
     color: var(--laranja-destaque);
     font-size: var(--tamanho-titulo);
 }
 
-#part_inferior{
+#part_inferior {
     display: grid;
     justify-content: center;
     align-items: center;
@@ -42,20 +44,27 @@
     padding: 1%;
 }
 
-.esquerda{
+.esquerda {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 50px;
     font-size: var(--tamanho-texto-btn);
     color: var(--fonte-preta);
-    padding: 1%;
+    padding: 4%;
 }
 
-.direita{
+.direita {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 50px;
     font-size: var(--tamanho-texto-btn);
     color: var(--fonte-preta);
-    padding: 1%;
+    padding: 4%;
 }
+
+.lista {
+    margin-left: 16px;
+    font-size: var(--fonte-texto);
+    color: #111;
+}
+

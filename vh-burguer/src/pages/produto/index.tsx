@@ -81,17 +81,17 @@ const Produto = () => {
 
     useEffect(() => {
 
-        if(!verificarAutenticacao()){
-            router.push("/home");
-        }else{
-            setEstaAutenticado(true);
-        }
-        
-        listarCatagoriaEmProduto();
-        carregarInformacoes();
-    }, [])
+        if (!router.isReady) return;
 
-    if(!estaAutenticado){
+        if (!verificarAutenticacao()) {
+            router.push("/home");
+        }
+        setEstaAutenticado(true);
+        carregarInformacoes();
+        listarCatagoriaEmProduto();
+    }, [router.isReady, id])
+
+    if (!estaAutenticado) {
         return null;
     }
 
@@ -143,13 +143,13 @@ const Produto = () => {
 
                     <div className={styles.camp_img}>
                         <label htmlFor="" className={styles.label}>URL da imagem</label>
-                        <input type="file" 
-                        className={styles.input_file} 
-                        onChange={(e) => {
-                            if (e.target.files && e.target.files[0]) {
-                                setImagem(e.target.files[0])
-                            }
-                        }} />
+                        <input type="file"
+                            className={styles.input_file}
+                            onChange={(e) => {
+                                if (e.target.files && e.target.files[0]) {
+                                    setImagem(e.target.files[0])
+                                }
+                            }} />
                     </div>
                     <div className={styles.div_btns}>
                         <button type="submit" className={styles.btn_sal}>Salvar</button>
