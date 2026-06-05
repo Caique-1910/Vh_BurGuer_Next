@@ -1,7 +1,6 @@
 import Footer from "@/components/footer/footer";
-import SubHeader from "@/components/sub-header/sub-header";
+import SubHeader from "@/components/sub-header/sub-header"
 import styles from "./produto.module.css"
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import { listarCategoria } from "../api/categoriaService";
 import { cadastrarProduto, editarProduto, listarPorId } from "../api/produtoService";
@@ -11,155 +10,144 @@ import { useRouter } from "next/router";
 import { verificarAutenticacao } from "@/utils/auth";
 
 interface Categoria {
-    categoriaID: number,
-    nome: string
+  categoriaID: number,
+  nome: string
 }
-
 
 const Produto = () => {
 
-    const [categorias, setCategorias] = useState<Categoria[]>([]);
+  const [categorias, setCategorias] = useState<Categoria[]>([]);
 
-    const [nome, setNome] = useState<string>("");
-    const [descricao, setDescricao] = useState<string>("");
-    const [preco, setPreco] = useState<string>("");
-    const [imagem, setImagem] = useState<File | null>(null);
-    const [categoriasSelecionadas, setcategoriasSelecionadas] = useState<number[]>([]);
+  const [nome, setNome] = useState<string>("");
+  const [descricao, setDescricao] = useState<string>("");
+  const [preco, setPreco] = useState<string>("");
+  const [imagem, setImagem] = useState<File | null>(null);
+  const [categoriasSelecionadas, setcategoriasSelecionadas] = useState<number[]>([]);
+  const [estaAutenticado, setEstaAutenticado] = useState(false);
 
-    const [estaAutenticado, setEstaAutenticado] = useState(false);
+  const router = useRouter();
+  const id = router.query.id;
+  let telaEditar = id ? true : false;
 
-    const router = useRouter();
-    const id = router.query.id;
+  async function listarCatagoriaEmProduto() {
+    const lista = await listarCategoria();
+    setCategorias(lista.data);
+    console.log(lista.data);
+  }
 
-    let edicao = id ? true : false;
+  async function carregarInformacoes() {
+    if (!id) return;
 
+    const produto = await listarPorId(Number(id));
+    setNome(produto.nome);
+    setDescricao(produto.descricao);
+    setPreco(produto.preco);
+    setcategoriasSelecionadas(produto.categoriaIds)
+  }
 
-    async function listarCatagoriaEmProduto() {
-        const lista = await listarCategoria();
-        setCategorias(lista.data);
-        console.log(lista.data);
+  async function salvarProduto(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    try {
+
+      const dados = {
+        nome,
+        descricao,
+        preco,
+        imagem,
+        categoriasId: categoriasSelecionadas
+      }
+
+      // await cadastrarProduto(dados)
+
+      if (telaEditar) {
+        await editarProduto(Number(id), dados);
+        notificacao("Produto editado!");
+      } else {
+        await cadastrarProduto(dados)
+        notificacao("Produto cadastrado!");
+      }
+    } catch (error: any) {
+      erro(error.message);
     }
 
-    async function carregarInformacoes() {
-        if (!id) return;
+  }
+  //quando produto for renderizado, a funcao listarCatagoriaEmProduto acontece
+  useEffect(() => {
+    if (!router.isReady) return;
 
-        const produto = await listarPorId(Number(id));
-        setNome(produto.nome);
-        setDescricao(produto.descricao);
-        setPreco(produto.preco);
-        setcategoriasSelecionadas(produto.categoriaIDs);
-
-
+    if (!verificarAutenticacao()) {
+      router.push("/home")
+      return;
     }
+    setEstaAutenticado(true);
 
-    async function salvarProduto(e: React.FormEvent<HTMLFormElement>) {
-        e.preventDefault();
-        try {
+    listarCatagoriaEmProduto();
 
-            const dados = {
-                nome,
-                descricao,
-                preco,
-                imagem,
-                categoriasId: categoriasSelecionadas
-            }
+    carregarInformacoes();
+    
+  }, [router.isReady, id])
 
-            if (edicao) {
-                await editarProduto(Number(id), dados);
-                notificacao("Produto editado.");
-            }
-            else {
-                await cadastrarProduto(dados);
-                notificacao("Produto cadastrado.");
-            }
-        } catch (error: any) {
-            erro(error.message);
-        }
-
-    }
-
-
-    useEffect(() => {
-
-        if (!router.isReady) return;
-
-        if (!verificarAutenticacao()) {
-            router.push("/home");
-        }
-        setEstaAutenticado(true);
-        carregarInformacoes();
-        listarCatagoriaEmProduto();
-    }, [router.isReady, id])
-
-    if (!estaAutenticado) {
-        return null;
-    }
-
-
-
-    return (
-        <>
-            <SubHeader />
-            <Toast />
-            <main className={styles.conteudoPrin}>
-                <h2>{edicao ? "Editar Produto" : " Criar Produto"}</h2>
-
-                <form action="" className={styles.forms} onSubmit={salvarProduto}>
-
-                    <div className={styles.camp_nome}>
-                        <label htmlFor="" className={styles.label}>Nome do produto</label>
-                        <input type="text" placeholder="BBQ Especial" className={styles.input} value={nome} onChange={(e) => setNome(e.target.value)} />
-                    </div>
-
-                    <div className={styles.camp_descri}>
-                        <label htmlFor="" className={styles.label}>Descrição</label>
-                        <textarea name="" id="" placeholder="Hamburguer com molho barbecue defumado com cebola caramelizada" className={styles.caixaTexto} value={descricao} onChange={(e) => setDescricao(e.target.value)} >
-                        </textarea>
-                    </div>
-
-                    <div className={styles.camp_prec}>
-                        <label htmlFor="" className={styles.label}>Preço(R$)</label>
-                        <input type="text" placeholder="40,00" className={styles.input} value={preco} onChange={(e) => setPreco(e.target.value)} />
-                    </div>
-
-                    <div className={styles.camp_cat}>
-                        <label htmlFor="" className={styles.label}>Categoria</label>
-                        <select
-                            className={styles.input}
-                            multiple
-                            value={categoriasSelecionadas.map(String)}
-                            onChange={(e) => setcategoriasSelecionadas(
-                                Array.from(e.target.selectedOptions).map((option) => Number(option.value))
-                            )}>
-                            {categorias.map((item) => (
-                                <option value={item.categoriaID} key={item.categoriaID}>
-                                    {item.nome}
-                                </option>))}
-                        </select>
-                        <div className={styles.div_link}>
-                            <Link href="./categoria" className={styles.link}>Adicionar categoria</Link>
-                        </div>
-                    </div>
-
-                    <div className={styles.camp_img}>
-                        <label htmlFor="" className={styles.label}>URL da imagem</label>
-                        <input type="file"
-                            className={styles.input_file}
-                            onChange={(e) => {
-                                if (e.target.files && e.target.files[0]) {
-                                    setImagem(e.target.files[0])
-                                }
-                            }} />
-                    </div>
-                    <div className={styles.div_btns}>
-                        <button type="submit" className={styles.btn_sal}>Salvar</button>
-                    </div>
-                </form>
-
-            </main >
-            <Footer />
-        </>
-    )
+//a tela de produto não será renderizada
+if (!estaAutenticado) {
+  return null;
 }
 
-export default Produto
+return (
+  <>
+    <SubHeader />
+    <Toast />
+    <main className={styles.main_produto}>
+      <section className={`${styles.section_flex} layout_guide`}>
+        <h1>{telaEditar ? "Editar produto" : "Criar produto"}</h1>
+        <form className={styles.formulario_produto} onSubmit={salvarProduto}>
+          <div className={styles.campo_form}>
+            <label htmlFor="">Nome do produto</label>
+            <input type="text" name="nome"
+              value={nome} onChange={(e) => setNome(e.target.value)} />
+          </div>
+          <div className={styles.campo_form}>
+            <label htmlFor="">Descrição</label>
+            <textarea name="descricao" value={descricao} onChange={(e) => setDescricao(e.target.value)}></textarea>
+          </div>
+          <div className={styles.campo_form}>
+            <label htmlFor="">Preço(R$)</label>
+            <input type="text" name="preco" value={preco} onChange={(e) => setPreco(e.target.value)} />
+          </div>
+          <div className={styles.campo_form}>
+            <label htmlFor="">Categoria</label>
+            <select
+              name="categoriaIds"
+              multiple
+              value={categoriasSelecionadas.map(String)}
+              onChange={(e) => setcategoriasSelecionadas(
+                Array.from(e.target.selectedOptions).map((option) => Number(option.value))
+              )}>
+              {categorias.map((item) => (
+                <option value={item.categoriaID} key={item.categoriaID}>{item.nome}</option>
+              )
+              )}
+            </select>
+
+            <a href="">Criar categoria</a>
+          </div>
+          <div className={styles.campo_form}>
+            <label htmlFor="">Imagem do produto</label>
+            <input
+              type="file"
+              onChange={(e) => {
+                if (e.target.files && e.target.files[0]) {
+                  setImagem(e.target.files[0]);
+                }
+              }}
+            />
+          </div>
+          <button id={styles.btn_salvar}>Salvar</button>
+        </form>
+      </section>
+    </main>
+    <Footer />
+  </>
+)
+}
+
+export default Produto;
